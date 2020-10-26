@@ -18,7 +18,7 @@ app.get('/qa/questions/:question_id/answers', (req, res) => {
       res.status(500).send();
     } else {
       res.status(200).send(data);
-    })
+    }
 })
 
 app.post('/qa/questions', (req, res) => {
@@ -27,7 +27,7 @@ app.post('/qa/questions', (req, res) => {
       res.status(500).send();
     } else {
       res.status(201).send();
-    })
+    }
 })
 
 app.post('/qa/questions/:question_id/answers', (req, res) => {
@@ -36,7 +36,7 @@ app.post('/qa/questions/:question_id/answers', (req, res) => {
       res.status(500).send();
     } else {
       res.status(201).send();
-    })
+    }
 })
 
 app.put('/qa/questions/:question_id/helpful', (req, res) => {
@@ -45,7 +45,7 @@ app.put('/qa/questions/:question_id/helpful', (req, res) => {
       res.status(500).send();
     } else {
       res.status(204).send();
-    })
+    }
 })
 
 app.put('/qa/questions/:answer_id/helpful', (req, res) => {
@@ -54,7 +54,7 @@ app.put('/qa/questions/:answer_id/helpful', (req, res) => {
       res.status(500).send();
     } else {
       res.status(204).send();
-    })
+    }
 })
 
 app.put('/qa/questions/:question_id/report', (req, res) => {
@@ -63,7 +63,7 @@ app.put('/qa/questions/:question_id/report', (req, res) => {
       res.status(500).send();
     } else {
       res.status(204).send();
-    })
+    }
 })
 
 app.put('/qa/questions/:answer_id/report', (req, res) => {
