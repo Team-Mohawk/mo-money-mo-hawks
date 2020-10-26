@@ -9,7 +9,7 @@ app.get('/qa/questions', (req, res) => {
       res.status(500).send();
     } else {
       res.status(200).send(data);
-    })
+    }
 })
 
 app.get('/qa/questions/:question_id/answers', (req, res) => {
