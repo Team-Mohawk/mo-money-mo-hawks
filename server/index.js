@@ -72,7 +72,7 @@ app.put('/qa/questions/:answer_id/report', (req, res) => {
       res.status(500).send();
     } else {
       res.status(204).send();
-    })
+    }
 })
 
 app.listen(PORT, () => {
