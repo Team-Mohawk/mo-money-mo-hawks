@@ -110,7 +110,7 @@ var reportAnswer = function (id, callback) {
   .then((data) => {
     client.execute('UPDATE testqnas.answers SET reported=1 WHERE id=? AND product_id=?', [id, data.question_id], {prepare: true});
   })
-  then((data) => {
+  .then((data) => {
     callback(null, data);
   })
   .catch((err) => {
