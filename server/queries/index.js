@@ -59,38 +59,38 @@ var getAnswersByQuestion = function (id, callback) {
           date: row.date_written,
           answerer_name: row.answerer_name,
           helpfulness: helpful,
-          photos: photos.rows;
+          photos: photos.rows
         }
       })
     };
     return result;
   })
-  .then((data) => {callback(null, data)});
-  .catch((err) => {callback(err)});
+  .then((data) => {callback(null, data)})
+  .catch((err) => {callback(err)})
 }
 
 
 var postNewQuestion = function (product_id, body, asker_name, asker_email, callback) {
   var date = new Date();
-  var datea = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' date.getDate();
-  client.execute('INSERT INTO testqnas.questions product_id, body, date_written, asker_name, asker_email, reported, helpful VALUES ? ? ? ? ? ? ?' [product_id, body, datea, asker_name, asker_email, 0, 0], {prepare: true});
-  .then((data) => {callback(null, data)});
-  .catch((err) => {callback(err)});
+  var datea = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
+  client.execute('INSERT INTO testqnas.questions product_id, body, date_written, asker_name, asker_email, reported, helpful VALUES ? ? ? ? ? ? ?' [product_id, body, datea, asker_name, asker_email, 0, 0], {prepare: true})
+  .then((data) => {callback(null, data)})
+  .catch((err) => {callback(err)})
 }
 
 var postNewAnswer = function (question_id, body, answerer_name, answerer_email, callback) {
   var date = new Date();
-  var datea = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' date.getDate();
-  client.execute('INSERT INTO testqnas.answers question_id, body, date_written, answerer_name, answerer_email, reported, helpful VALUES ? ? ? ? ? ? ?', [question_id, body, datea, answerer_name, answerer_email, 0, 0], {prepare: true});
-  .then((data) => {callback(null, data)});
-  .catch((err) => {callback(err)});
+  var datea = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
+  client.execute('INSERT INTO testqnas.answers question_id, body, date_written, answerer_name, answerer_email, reported, helpful VALUES ? ? ? ? ? ? ?', [question_id, body, datea, answerer_name, answerer_email, 0, 0], {prepare: true})
+  .then((data) => {callback(null, data)})
+  .catch((err) => {callback(err)})
 }
 
 var reportQuestion = function (id, callback) {
-  client.execute('SELECT product_id FROM testqnas.questions WHERE id=? ALLOW FILTERING', [id], {prepare: true});
+  client.execute('SELECT product_id FROM testqnas.questions WHERE id=? ALLOW FILTERING', [id], {prepare: true})
   .then((data) => {
     var product_id = data.rows[0].product_id;
-    return {product_id: product_id}});
+    return {product_id: product_id}})
   .then((data) => {
     client.execute('UPDATE testqnas.questions SET reported=1 WHERE id=? AND product_id=?', [id, data.product_id], {prepare: true});
   })
@@ -103,10 +103,10 @@ var reportQuestion = function (id, callback) {
 }
 
 var reportAnswer = function (id, callback) {
-  client.execute('SELECT question_id FROM testqnas.answers WHERE id=? ALLOW FILTERING', [id], {prepare: true});
+  client.execute('SELECT question_id FROM testqnas.answers WHERE id=? ALLOW FILTERING', [id], {prepare: true})
   .then((data) => {
     var question_id = data.rows[0].question_id;
-    return {question_id: question_id}});
+    return {question_id: question_id}})
   .then((data) => {
     client.execute('UPDATE testqnas.answers SET reported=1 WHERE id=? AND product_id=?', [id, data.question_id], {prepare: true});
   })
@@ -119,7 +119,7 @@ var reportAnswer = function (id, callback) {
 }
 
 var addQuestionHelpfulness = function (id, callback) {
-  client.execute('SELECT helpful, product_id FROM testqnas.questions WHERE id=? ALLOW FILTERING', [id], {prepare: true});
+  client.execute('SELECT helpful, product_id FROM testqnas.questions WHERE id=? ALLOW FILTERING', [id], {prepare: true})
   .then((data) => {
     var helpful = data.rows[0].helpful + 1;
     var product_id = data.rows[0].product_id;
@@ -137,7 +137,7 @@ var addQuestionHelpfulness = function (id, callback) {
 }
 
 var addAnswerHelpfulness = function (id, callback) {
-  client.execute('SELECT helpful, question_id FROM testqnas.answers WHERE id=? ALLOW FILTERING', [id], {prepare: true});
+  client.execute('SELECT helpful, question_id FROM testqnas.answers WHERE id=? ALLOW FILTERING', [id], {prepare: true})
   .then((data) => {
     var helpful = data.rows[0].helpful + 1;
     var question_id = data.rows[0].question_id;
